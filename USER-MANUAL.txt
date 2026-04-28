@@ -1,0 +1,18 @@
+CivicBudget User Manual
+
+Non-technical staff:
+Use CivicBudget to prepare budget narrative drafts, line-item variance notes, department memos, hearing packet checklists, resident summaries, and optional GFOA checklist reviews. Confirm every dollar amount, explanation, and public statement with finance leadership before use.
+
+What it is not:
+CivicBudget is not an ERP, budgeting system, accounting system, payroll system, fund-accounting system, budget-adoption workflow, official approval system, live LLM runtime, or live finance-system connector.
+
+IT/technical:
+Install with:
+python -m pip install -e ".[dev]"
+Run with:
+python -m uvicorn civicbudget.main:app --host 127.0.0.1 --port 8139
+Dependency: civiccore==0.2.0.
+Release gate: bash scripts/verify-release.sh.
+
+Architecture:
+Staff provide budget facts from official finance systems. CivicBudget creates reviewable drafts and checklists. Finance staff approve outputs. Future releases can add read-only ERP imports, CivicClerk packet handoffs, and CivicData transparency publishing.
