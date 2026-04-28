@@ -11,7 +11,7 @@ Install with:
 python -m pip install -e ".[dev]"
 Run with:
 python -m uvicorn civicbudget.main:app --host 127.0.0.1 --port 8139
-Dependency: civiccore==0.2.0.
+Dependency: civiccore==0.3.0.
 Release gate: bash scripts/verify-release.sh.
 
 Architecture:
