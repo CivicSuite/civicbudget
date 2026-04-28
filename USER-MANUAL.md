@@ -30,7 +30,7 @@ CivicBudget does not make budget decisions. It does not approve numbers. It does
 - It will not submit budget amendments.
 - It will not post official notices or packets.
 - It will not certify GFOA compliance.
-- It will not connect to live ERP or accounting systems in v0.1.0.
+- It will not connect to live ERP or accounting systems in v0.1.1.
 
 ## IT / Technical Guide
 
@@ -43,7 +43,7 @@ python -m uvicorn civicbudget.main:app --host 127.0.0.1 --port 8139
 
 ### Dependency
 
-CivicBudget v0.1.0 depends on `civiccore==0.2.0`.
+CivicBudget v0.1.1 depends on `civiccore==0.3.0`.
 
 ### Verification
 
@@ -69,4 +69,4 @@ The release gate checks documentation, placeholder imports, tests, Ruff, package
 
 ![CivicBudget architecture](docs/architecture-civicbudget.svg)
 
-The architecture is intentionally local and conservative in v0.1.0. Staff provide budget facts from official systems. CivicBudget creates reviewable drafts and checklists. Finance staff approve outputs. Future releases can add read-only ERP imports, CivicClerk packet handoffs, and CivicData transparency publishing without changing the boundary that official decisions remain with municipal staff.
+The architecture is intentionally local and conservative in v0.1.1. Staff provide budget facts from official systems. CivicBudget creates reviewable drafts and checklists. Finance staff approve outputs. Future releases can add read-only ERP imports, CivicClerk packet handoffs, and CivicData transparency publishing without changing the boundary that official decisions remain with municipal staff.

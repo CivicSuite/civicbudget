@@ -1,10 +1,10 @@
 # CivicBudget
 
-CivicBudget is the CivicSuite budget narrative and transparency support module. Version 0.1.0 helps finance staff prepare line-item variance notes, department budget narratives, council-facing budget memos, hearing packet checklists, plain-English resident summaries, and optional GFOA presentation checklist reviews.
+CivicBudget is the CivicSuite budget narrative and transparency support module. Version 0.1.1 helps finance staff prepare line-item variance notes, department budget narratives, council-facing budget memos, hearing packet checklists, plain-English resident summaries, and optional GFOA presentation checklist reviews.
 
 It is intentionally not an ERP, budgeting system, accounting system, payroll system, fund-accounting tool, budget-adoption workflow, or official approval system. CivicBudget prepares reviewable staff work products; finance staff remain responsible for every number, narrative, and public-facing statement.
 
-## Shipping in v0.1.0
+## Shipping in v0.1.1
 
 - Line-item variance analysis with finance-review notes.
 - Budget narrative draft assembly from department priorities and line-item inputs.
@@ -18,7 +18,7 @@ It is intentionally not an ERP, budgeting system, accounting system, payroll sys
 ## Not shipped yet
 
 - ERP, budgeting, accounting, payroll, fund accounting, budget adoption, official approvals, live LLM calls, or live finance-system connector runtime.
-- Live CivicClerk packet submission and live CivicData publishing handoffs. v0.1.0 prepares the handoff checklist; later releases will wire the cross-module workflow.
+- Live CivicClerk packet submission and live CivicData publishing handoffs. v0.1.1 prepares the handoff checklist; later releases will wire the cross-module workflow.
 - Finance approval queues, role-based workflow, and signed publication records.
 
 ## Install
@@ -28,7 +28,7 @@ python -m pip install -e ".[dev]"
 python -m uvicorn civicbudget.main:app --host 127.0.0.1 --port 8139
 ```
 
-CivicBudget v0.1.0 is pinned to `civiccore==0.2.0`.
+CivicBudget v0.1.1 is pinned to `civiccore==0.3.0`.
 
 ## Operator Path
 

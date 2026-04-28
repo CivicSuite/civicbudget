@@ -8,7 +8,7 @@ from civicbudget.resident_summary import draft_resident_summary
 
 
 def test_version_is_release_version():
-    assert __version__ == "0.1.0"
+    assert __version__ == "0.1.1"
 
 
 def test_line_item_analysis_flags_material_variance():
