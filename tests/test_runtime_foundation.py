@@ -21,17 +21,17 @@ def test_health_reports_civiccore_pin():
     assert client.get("/health").json() == {
         "status": "ok",
         "service": "civicbudget",
-        "version": "0.1.1",
-        "civiccore_version": "0.3.0",
+        "version": "0.1.2",
+        "civiccore_version": "0.4.0",
     }
 
 
 def test_public_ui_contains_version_boundaries_and_dependency():
     text = client.get("/civicbudget").text
 
-    assert "CivicBudget v0.1.1" in text
+    assert "CivicBudget v0.1.2" in text
     assert "No ERP" in text
-    assert "civiccore==0.3.0" in text
+    assert "civiccore==0.4.0" in text
 
 
 def test_api_endpoints_return_deterministic_payloads():

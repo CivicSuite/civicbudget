@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.2] - 2026-04-29
+
+### Added
+
+- Bearer-token auth and role checks for persisted budget narrative and hearing packet retrieval routes via `CIVICBUDGET_AUTH_TOKEN_ROLES` and `civiccore.auth`.
+
+### Changed
+
+- Moved CivicBudget to `civiccore==0.4.0` so persisted retrieval protection consumes the published shared auth helper instead of a module-local bridge.
+- Updated CI, release verification, docs, runtime tests, and public UI copy for the v0.1.2 dependency and auth boundary.
+
 ## [0.1.1] - 2026-04-28
 
 ### Added
