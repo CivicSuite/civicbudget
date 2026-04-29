@@ -1,6 +1,6 @@
 # CivicBudget
 
-CivicBudget is the CivicSuite budget narrative and transparency support module. Version 0.1.1 helps finance staff prepare line-item variance notes, department budget narratives, council-facing budget memos, hearing packet checklists, plain-English resident summaries, and optional GFOA presentation checklist reviews.
+CivicBudget is the CivicSuite budget narrative and transparency support module. Version 0.1.1 helps finance staff prepare line-item variance notes, department budget narratives, council-facing budget memos, hearing packet checklists, plain-English resident summaries, optional GFOA presentation checklist reviews, and optional local workpaper records.
 
 It is intentionally not an ERP, budgeting system, accounting system, payroll system, fund-accounting tool, budget-adoption workflow, or official approval system. CivicBudget prepares reviewable staff work products; finance staff remain responsible for every number, narrative, and public-facing statement.
 
@@ -10,6 +10,7 @@ It is intentionally not an ERP, budgeting system, accounting system, payroll sys
 - Budget narrative draft assembly from department priorities and line-item inputs.
 - Department budget memo draft scaffolding.
 - Budget hearing packet checklist support for CivicClerk handoff.
+- Optional database-backed narrative and hearing packet workpaper records via `CIVICBUDGET_WORKPAPER_DB_URL`.
 - Plain-English resident budget summary drafts.
 - Optional GFOA presentation checklist support.
 - FastAPI runtime with health, public landing page, and deterministic API endpoints.
@@ -44,11 +45,23 @@ CivicBudget v0.1.1 is pinned to `civiccore==0.3.0`.
 - `GET /health` returns runtime and CivicCore version status.
 - `GET /civicbudget` renders the public module overview.
 - `POST /api/v1/civicbudget/line-items` returns variance analysis.
-- `POST /api/v1/civicbudget/narrative` returns a finance-review-required narrative draft.
+- `POST /api/v1/civicbudget/narrative` returns a finance-review-required narrative draft and a `narrative_id` when persistence is configured.
+- `GET /api/v1/civicbudget/narrative/{narrative_id}` retrieves a persisted narrative when `CIVICBUDGET_WORKPAPER_DB_URL` is configured.
 - `POST /api/v1/civicbudget/memo` returns a non-approval budget memo draft.
-- `POST /api/v1/civicbudget/hearing-packet` returns a CivicClerk-ready checklist.
+- `POST /api/v1/civicbudget/hearing-packet` returns a CivicClerk-ready checklist and a `packet_id` when persistence is configured.
+- `GET /api/v1/civicbudget/hearing-packet/{packet_id}` retrieves a persisted hearing packet when `CIVICBUDGET_WORKPAPER_DB_URL` is configured.
 - `POST /api/v1/civicbudget/resident-summary` returns a publication-review-required public summary draft.
 - `POST /api/v1/civicbudget/gfoa-review` returns a checklist, not certification.
+
+## Optional Persistence
+
+Set `CIVICBUDGET_WORKPAPER_DB_URL` to enable local SQLAlchemy-backed narrative and hearing packet workpaper records:
+
+```bash
+export CIVICBUDGET_WORKPAPER_DB_URL="sqlite+pysqlite:///./civicbudget.db"
+```
+
+Without that variable, CivicBudget remains deterministic and stateless. Retrieval endpoints return actionable `503` responses that name the required configuration.
 
 ## Documentation
 

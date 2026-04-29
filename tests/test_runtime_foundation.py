@@ -11,6 +11,8 @@ def test_root_reports_honest_current_state():
 
     assert payload["name"] == "CivicBudget"
     assert payload["version"] == __version__
+    assert payload["status"] == "budget narrative foundation plus workpaper persistence"
+    assert "database-backed narrative and hearing packet workpapers" in payload["message"]
     assert "ERP" in payload["message"]
     assert "not implemented yet" in payload["message"]
 
@@ -40,8 +42,8 @@ def test_api_endpoints_return_deterministic_payloads():
         client.post(
             "/api/v1/civicbudget/narrative",
             json={"department": "Parks", "priorities": ["Fields"], "line_items": items},
-        ).status_code
-        == 200
+        ).json()["narrative_id"]
+        is None
     )
     assert (
         client.post(
@@ -58,8 +60,8 @@ def test_api_endpoints_return_deterministic_payloads():
         client.post(
             "/api/v1/civicbudget/hearing-packet",
             json={"hearing_name": "FY27", "required_items": ["Memo"]},
-        ).status_code
-        == 200
+        ).json()["packet_id"]
+        is None
     )
     assert (
         client.post(
