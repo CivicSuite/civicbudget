@@ -2,6 +2,11 @@
 
 ## [0.1.1] - 2026-04-28
 
+### Added
+
+- Optional SQLAlchemy-backed budget narrative and hearing packet workpaper records via `CIVICBUDGET_WORKPAPER_DB_URL`.
+- Budget narrative and hearing packet retrieval endpoints for persisted records.
+
 ### Changed
 
 - Dependency-alignment release: moved CivicBudget to `civiccore==0.3.0` while preserving the existing v0.1.0 runtime foundation behavior.

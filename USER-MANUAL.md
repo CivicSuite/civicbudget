@@ -2,7 +2,7 @@
 
 ## What CivicBudget Is
 
-CivicBudget helps municipal finance teams prepare budget-supporting text and checklists. It is designed for budget narrative preparation, line-item variance explanation, department memo drafting, hearing packet readiness, resident-facing budget summaries, and optional GFOA presentation checklist review.
+CivicBudget helps municipal finance teams prepare budget-supporting text, checklists, and optional local workpaper records. It is designed for budget narrative preparation, line-item variance explanation, department memo drafting, hearing packet readiness, resident-facing budget summaries, and optional GFOA presentation checklist review.
 
 CivicBudget does not make budget decisions. It does not approve numbers. It does not replace the city ERP, accounting system, payroll system, fund-accounting system, or budget adoption process.
 
@@ -60,13 +60,17 @@ The release gate checks documentation, placeholder imports, tests, Ruff, package
 - `GET /civicbudget`
 - `POST /api/v1/civicbudget/line-items`
 - `POST /api/v1/civicbudget/narrative`
+- `GET /api/v1/civicbudget/narrative/{narrative_id}`
 - `POST /api/v1/civicbudget/memo`
 - `POST /api/v1/civicbudget/hearing-packet`
+- `GET /api/v1/civicbudget/hearing-packet/{packet_id}`
 - `POST /api/v1/civicbudget/resident-summary`
 - `POST /api/v1/civicbudget/gfoa-review`
+
+Set `CIVICBUDGET_WORKPAPER_DB_URL` to enable local SQLAlchemy-backed narrative and hearing packet workpaper records. If the variable is not set, CivicBudget keeps deterministic stateless behavior and retrieval endpoints return actionable configuration guidance.
 
 ## Supporting Architecture
 
 ![CivicBudget architecture](docs/architecture-civicbudget.svg)
 
-The architecture is intentionally local and conservative in v0.1.1. Staff provide budget facts from official systems. CivicBudget creates reviewable drafts and checklists. Finance staff approve outputs. Future releases can add read-only ERP imports, CivicClerk packet handoffs, and CivicData transparency publishing without changing the boundary that official decisions remain with municipal staff.
+The architecture is intentionally local and conservative in v0.1.1. Staff provide budget facts from official systems. CivicBudget creates reviewable drafts, checklists, and optional local workpaper records. Finance staff approve outputs. Future releases can add read-only ERP imports, CivicClerk packet handoffs, and CivicData transparency publishing without changing the boundary that official decisions remain with municipal staff.
