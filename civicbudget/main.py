@@ -2,7 +2,9 @@
 import os
 
 from civiccore import __version__ as CIVICCORE_VERSION
-from fastapi import FastAPI, HTTPException, Response
+from civiccore.auth import AuthenticatedPrincipal, authorize_bearer_roles
+from fastapi import Depends, FastAPI, HTTPException, Response
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
@@ -27,6 +29,7 @@ app = FastAPI(
 
 _workpaper_repository: BudgetWorkpaperRepository | None = None
 _workpaper_db_url: str | None = None
+_workpaper_bearer = HTTPBearer(auto_error=False)
 
 
 @app.get("/favicon.ico", include_in_schema=False)
@@ -80,7 +83,7 @@ def root() -> dict[str, str]:
             "live LLM calls, and live finance-system connectors are not implemented yet."
         ),
         "next_step": (
-            "Post-v0.1.1 roadmap: finance approval queues, ERP read-only imports, and "
+            "Post-v0.1.2 roadmap: finance approval queues, ERP read-only imports, and "
             "CivicClerk/CivicData handoffs"
         ),
     }
@@ -106,6 +109,18 @@ def line_items(request: LineItemsRequest) -> dict[str, object]:
     return {"variances": [v.__dict__ for v in analyze_line_items(request.items)]}
 
 
+def _require_workpaper_reader(
+    credentials: HTTPAuthorizationCredentials | None = Depends(_workpaper_bearer),
+) -> AuthenticatedPrincipal:
+    return authorize_bearer_roles(
+        credentials,
+        service_name="CivicBudget",
+        feature_name="persisted workpaper retrieval",
+        token_roles_env_var="CIVICBUDGET_AUTH_TOKEN_ROLES",
+        allowed_roles={"workpaper_reader", "budget_admin"},
+    )
+
+
 @app.post("/api/v1/civicbudget/narrative")
 def narrative(request: NarrativeRequest) -> dict[str, object]:
     if _workpaper_database_url() is not None:
@@ -129,7 +144,10 @@ def narrative(request: NarrativeRequest) -> dict[str, object]:
 
 
 @app.get("/api/v1/civicbudget/narrative/{narrative_id}")
-def get_narrative(narrative_id: str) -> dict[str, object]:
+def get_narrative(
+    narrative_id: str,
+    _principal: AuthenticatedPrincipal = Depends(_require_workpaper_reader),
+) -> dict[str, object]:
     if _workpaper_database_url() is None:
         raise HTTPException(
             status_code=503,
@@ -178,7 +196,10 @@ def hearing_packet(request: HearingPacketRequest) -> dict[str, object]:
 
 
 @app.get("/api/v1/civicbudget/hearing-packet/{packet_id}")
-def get_hearing_packet(packet_id: str) -> dict[str, object]:
+def get_hearing_packet(
+    packet_id: str,
+    _principal: AuthenticatedPrincipal = Depends(_require_workpaper_reader),
+) -> dict[str, object]:
     if _workpaper_database_url() is None:
         raise HTTPException(
             status_code=503,
