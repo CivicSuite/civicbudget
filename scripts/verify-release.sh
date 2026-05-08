@@ -2,7 +2,7 @@
 set -euo pipefail
 echo "VERIFY-RELEASE: CivicBudget v0.1.2"
 PYTHON_CANDIDATES=(); [[ -n "${CIVICBUDGET_RELEASE_PYTHON:-}" ]] && PYTHON_CANDIDATES+=("$CIVICBUDGET_RELEASE_PYTHON")
-PYTHON_CANDIDATES+=(python python3 py "/mnt/c/Users/scott/AppData/Local/Microsoft/WindowsApps/python.exe")
+PYTHON_CANDIDATES+=(python3 python py)
 PYTHON_BIN=""
 for candidate in "${PYTHON_CANDIDATES[@]}"; do if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c "import build, pytest, ruff" >/dev/null 2>&1; then PYTHON_BIN="$candidate"; break; fi; done
 if [[ -z "$PYTHON_BIN" ]]; then echo "[FAIL] python: no interpreter with build, pytest, and ruff available"; exit 1; fi
