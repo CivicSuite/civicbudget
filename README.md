@@ -1,10 +1,10 @@
 # CivicBudget
 
-CivicBudget is the CivicSuite budget narrative and transparency support module. Version 0.1.2 helps finance staff prepare line-item variance notes, department budget narratives, council-facing budget memos, hearing packet checklists, plain-English resident summaries, optional GFOA presentation checklist reviews, and optional local workpaper records.
+CivicBudget is the CivicSuite budget narrative and transparency support module. Published version 0.1.2 is a foundation label under suite-wide release-recovery review. It helps finance staff prepare line-item variance notes, department budget narratives, council-facing budget memos, hearing packet checklists, plain-English resident summaries, optional GFOA presentation checklist reviews, and optional local workpaper records. Do not promote it as production budget software until the recovery gates and a future v1.0.0 definition of done are complete.
 
 It is intentionally not an ERP, budgeting system, accounting system, payroll system, fund-accounting tool, budget-adoption workflow, or official approval system. CivicBudget prepares reviewable staff work products; finance staff remain responsible for every number, narrative, and public-facing statement.
 
-## Shipping in v0.1.2
+## Available in v0.1.2
 
 - Line-item variance analysis with finance-review notes.
 - Budget narrative draft assembly from department priorities and line-item inputs.
@@ -30,7 +30,7 @@ python -m pip install -e ".[dev]"
 python -m uvicorn civicbudget.main:app --host 127.0.0.1 --port 8139
 ```
 
-CivicBudget v0.1.2 is pinned to `civiccore==0.4.0`.
+CivicBudget v0.1.2 is pinned to the published CivicCore v0.4.0 release wheel.
 
 ## Operator Path
 

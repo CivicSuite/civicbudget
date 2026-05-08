@@ -1,7 +1,7 @@
 CivicBudget User Manual
 
 Non-technical staff:
-Use CivicBudget to prepare budget narrative drafts, line-item variance notes, department memos, hearing packet checklists, resident summaries, optional GFOA checklist reviews, and optional local workpaper records. Confirm every dollar amount, explanation, and public statement with finance leadership before use.
+Use CivicBudget to prepare budget narrative drafts, line-item variance notes, department memos, hearing packet checklists, resident summaries, optional GFOA checklist reviews, and optional local workpaper records. Published version 0.1.2 is a foundation label under suite-wide release-recovery review. Do not promote it as production budget software until the recovery gates and a future v1.0.0 definition of done are complete. Confirm every dollar amount, explanation, and public statement with finance leadership before use.
 
 What it is not:
 CivicBudget is not an ERP, budgeting system, accounting system, payroll system, fund-accounting system, budget-adoption workflow, official approval system, live LLM runtime, or live finance-system connector.
@@ -11,7 +11,7 @@ Install with:
 python -m pip install -e ".[dev]"
 Run with:
 python -m uvicorn civicbudget.main:app --host 127.0.0.1 --port 8139
-Dependency: civiccore==0.3.0.
+Dependency: published CivicCore v0.4.0 release wheel.
 Release gate: bash scripts/verify-release.sh.
 Optional persistence: set CIVICBUDGET_WORKPAPER_DB_URL to enable SQLAlchemy-backed narrative and hearing packet workpaper records. Without it, CivicBudget remains deterministic and stateless.
 
